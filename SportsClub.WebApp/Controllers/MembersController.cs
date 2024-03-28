@@ -2,6 +2,7 @@
 using SportsClub.Entities;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -21,10 +22,29 @@ namespace SportsClub.WebApp.Controllers
         // tweede create methode verwerkt de data van de create pagina
         // parameters = zelfde naam als de 'name' van de input tags
         [HttpPost]
-        public ActionResult Create(string firstName, string lastName)
+        public ActionResult Create(string firstName, string lastName, HttpPostedFileBase picture)
         {
+            // variabele voor bestandsnaam foto
+            // standaard wordt dit dus een anonieme afbeelding
+            string pictureName = "unknown.jpg";
+
+            // checken of er effectief een foto doorkomt
+            if (picture != null)
+            {
+                // pad voor opslaan foto's instellen
+                string path = Server.MapPath("~/Content/images/members/");
+                // foto nieuwe naam geven om te zorgen dat we niet per ongeluk
+                // een foto overschrijven die dezelfde naam heeft
+                // bvb: "8772c242-0eae-444e-9e1a-568e90a02dd8.jpg"
+                pictureName = Guid.NewGuid() + Path.GetExtension(picture.FileName);
+                // naam van de foto toevoegen aan pad voor opslaan
+                path += pictureName;
+                // foto effectief opslaan in map
+                picture.SaveAs(path);
+            }
+
             // create methode uit BLL uitvoeren en waarde opslaan
-            bool createSuccessful = Members.Create(firstName, lastName);
+            bool createSuccessful = Members.Create(firstName, lastName, pictureName);
 
             // feedback maken
             if (createSuccessful)

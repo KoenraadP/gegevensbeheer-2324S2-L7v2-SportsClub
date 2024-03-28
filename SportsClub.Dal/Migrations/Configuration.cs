@@ -20,15 +20,7 @@
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
 
-            // test members toevoegen aan db
-            context.Members.AddOrUpdate(x => new {x.FirstName, x.LastName},
-                new Member("Vince","Iserniet"),
-                new Member("Moestie","Iserookniet"));
-
-            // test activiteiten toevoegen aan db
-            context.Activities.AddOrUpdate(x => x.Name,
-                new Activity("Voetbal", 30),
-                new Activity("Volleybal", 20));
+            
         }
     }
 }

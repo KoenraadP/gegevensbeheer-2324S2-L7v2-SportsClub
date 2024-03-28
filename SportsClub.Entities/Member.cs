@@ -20,6 +20,9 @@ namespace SportsClub.Entities
         public string FirstName { get; set; }
         [Required(ErrorMessage = "Achternaam mag niet leeg zijn.")]
         public string LastName { get; set; }
+        // de picture property zal de bestandsnaam
+        // van de foto bevatten
+        public string Picture { get; set; }
 
         // property die link legt met Activity
         // een member kan zich inschrijven voor meerdere activities --> list
@@ -27,10 +30,11 @@ namespace SportsClub.Entities
 
         // constructor om te zorgen dat Members altijd met een
         // voornaam en achternaam aangemaakt worden
-        public Member(string firstName, string lastName)
+        public Member(string firstName, string lastName, string picture)
         {
             FirstName = firstName;
             LastName = lastName;
+            Picture = picture;
             // lege list initialiseren
             Activities = new List<Activity>();
         }

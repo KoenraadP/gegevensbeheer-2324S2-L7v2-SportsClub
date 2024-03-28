@@ -11,7 +11,8 @@ namespace SportsClub.Bll
     public static class Members
     {
         // CREATE
-        public static bool Create(string firstName, string lastName)
+        public static bool Create(string firstName, string lastName,
+            string picture)
         {
             // spaties verwijderen uit firstname en lastname
             // de .Trim() methode verwijdert automatisch alle
@@ -24,7 +25,7 @@ namespace SportsClub.Bll
                 && !string.IsNullOrEmpty(lastName))
             {
                 // nieuwe member aanmaken met gegevens uit parameters
-                Member m = new Member(firstName, lastName);
+                Member m = new Member(firstName, lastName, picture);
                 // create methode uit dal uitvoeren
                 bool createSuccessful = MemberDal.Create(m);
                 // true of false als return geven
